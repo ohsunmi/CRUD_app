@@ -1,0 +1,15 @@
+<form action="/songs/<%= @song.id %>" method="post">
+	<div>
+		<label>Song: </label>
+		<input type="text" name="song[name]" value="<%= @song.name %>" />
+	</div>
+	<div>
+		<label>On iTunes?: </label>
+		<input type="text" name="song[on_itunes]" value="<%= @song.on_itunes %>" />
+	</div>
+	<div>
+		<label>Number of Soundcloud likes: </label>
+		<input type="text" name="song[soundcloud_likes]" value="<%= @song.soundcloud_likes %>" />
+	</div>
+	<input type="submit" value="Edit song" />
+</form>

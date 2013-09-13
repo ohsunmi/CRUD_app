@@ -1,0 +1,9 @@
+<% @nav_songs.each do |song| %>
+	<div>
+		<h3><a href="/songs/<%= song.id %>"><%= song.name %></a></h3>
+		<h4>On Itunes?: <%= song.on_itunes %></h4>
+		<h4>Soundcloud Likes: <%= song.soundcloud_likes %></h4>
+		<!-- change artist_id to name -->
+		<h4>Played by: <a href="/artists/<%= song.artist_id %>"><%= song.artist_id %></a></h4>
+	</div>
+<% end %>

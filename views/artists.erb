@@ -1,0 +1,8 @@
+<% @nav_artists.each do |artist| %>
+	<div>
+		<h3><a href="/artists/<%= artist.id %>"><%= artist.name %></a></h3>
+		<h4>Genre: <%= artist.genre %></h4>
+		<h4>Members: <%= artist.num_members %></h4>
+		<h4>From: <%= artist.origin %></h4>
+	</div>
+<% end %>

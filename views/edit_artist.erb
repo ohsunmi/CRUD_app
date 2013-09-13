@@ -1,0 +1,19 @@
+<form action="/artists/<%= @artist.id %>" method="post">
+	<div>
+		<label>Artist: </label>
+		<input type="text" name="artist[name]" value="<%= @artist.name %>" />
+	</div>
+	<div>
+		<label>Genre: </label>
+		<input type="text" name="artist[genre]" value="<%= @artist.genre %>" />
+	</div>
+	<div>
+		<label>Number of members: </label>
+		<input type="text" name="artist[num_members]" value="<%= @artist.num_members %>" />
+	</div>
+	<div>
+		<label>From: </label>
+		<input type="text" name="artist[origin]" value="<%= @artist.origin %>" />
+	</div>
+	<input type="submit" value="Edit artist" />
+</form>

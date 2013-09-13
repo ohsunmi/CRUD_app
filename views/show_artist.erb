@@ -1,0 +1,25 @@
+<div>
+<div>
+	<h3><%= @artist.name %></h3>
+		<ul>
+			<li><b>Genre: </b><%= @artist.genre %></li>
+			<li><b>Members: </b><%= @artist.num_members %></li>
+			<li><b>From: </b><%= @artist.origin %></li>
+		</ul>
+</div>
+
+<div>
+	<h4>Songs</h4>
+		<ul>
+			<% @artist.songs.each do |song| %>
+			<li><a href="/songs/<%= song.id %>"><%= song.name %></a></li>
+			<% end %>
+		</ul>
+</div>
+
+<div>
+	<a href="/artists/<%= @artist.id %>/edit">Edit this artist</a> | 
+	<a href="/artists/<%= @artist.id %>/delete">Delete this artist</a> | 
+	<a href="/artists/<%= @artist.id %>/add_song">Add song by this artist</a>
+</div>
+</div>
