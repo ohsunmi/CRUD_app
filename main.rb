@@ -3,13 +3,15 @@ require 'sinatra/reloader'
 require 'active_support/all'
 require 'active_record'
 
-ActiveRecord::Base.establish_connection(
-	:adapter => 'postgresql',
-	:host => 'localhost',
-	:username => 'Sunmi',
-	:password => '',
-	:database => 'crud_app'
-)
+# ActiveRecord::Base.establish_connection(
+# 	:adapter => 'postgresql',
+# 	:host => 'localhost',
+# 	:username => 'Sunmi',
+# 	:password => '',
+# 	:database => 'crud_app'
+# )
+
+ActiveRecord::Base.establish_connection(ENV['HEROKU_POSTGRESQL_ROSE_URL'] || 'postgres://localhost/books')
 
 ActiveRecord::Base.logger = Logger.new(STDOUT)
 
