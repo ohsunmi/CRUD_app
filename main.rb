@@ -11,7 +11,7 @@ require 'active_record'
 # 	:database => 'crud_app'
 # )
 
-ActiveRecord::Base.establish_connection(ENV['HEROKU_POSTGRESQL_ROSE_URL'] || 'postgres://localhost/books')
+ActiveRecord::Base.establish_connection(ENV['HEROKU_POSTGRESQL_MAROON_URL'] || 'postgres://localhost/crud_app')
 
 ActiveRecord::Base.logger = Logger.new(STDOUT)
 
