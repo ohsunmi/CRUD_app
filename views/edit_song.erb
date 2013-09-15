@@ -1,11 +1,12 @@
-<form action="/songs/<%= @song.id %>" method="post">
+<form action="/artists/<%= @artist.id %>/songs/<%= @song.id %>" method="post">
 	<div>
 		<label>Song: </label>
 		<input type="text" name="song[name]" value="<%= @song.name %>" />
 	</div>
 	<div>
 		<label>On iTunes?: </label>
-		<input type="text" name="song[on_itunes]" value="<%= @song.on_itunes %>" />
+		<input type="radio" name="song[on_itunes]" value="true" />Yes
+		<input type="radio" name="song[on_itunes]" value="false" />No
 	</div>
 	<div>
 		<label>Number of Soundcloud likes: </label>

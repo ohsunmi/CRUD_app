@@ -57,7 +57,7 @@ get '/artists/:id' do
 	erb :show_artist
 end
 
-# go to specific artist to edit & show current values
+# edit artist
 get '/artists/:id/edit' do
 	id = params[:id]
 	# SELECT * FROM artists WHERE id = id;
@@ -66,7 +66,7 @@ get '/artists/:id/edit' do
 	erb :edit_artist
 end
 
-
+# update artist
 post '/artists/:id' do
 	id = params[:id]
 
@@ -76,8 +76,6 @@ post '/artists/:id' do
 	# SET (name='name', genre='genre', num_members='num_members', origin='origin')
 	# WHERE id = id;
 	artist.update_attributes(params[:artist])
-
-	id = artist.id
 
 	redirect "/artists/#{id}"
 end
@@ -104,75 +102,68 @@ end
 
 # add new song to artist
 post '/artists/:id/add_song' do
+	id = params[:id]
 	# SELECT * FROM artists where id = id;
-	artist = Artist.find(params[:id])
+	artist = Artist.find(id)
 	# INSERT INTO songs (name, on_itunes, soundcloud_likes) VALUES ('name', 'on_itunes', 'soundcloud_likes') WHERE artist_id = id;
 	artist.songs << Song.new(params[:song])
-	id = artist.id
 
 	redirect "/artists/#{id}"
 end
 
-# show all songs page
-get '/songs' do
-	erb :songs
-end
-
-
-
-
-
-
-
-
-
-
-
 # show specific song
-get '/songs/:song_id' do
+get '/artists/:id/songs/:song_id' do
+	id = params[:id]
 	song_id = params[:song_id]
+
+	# SELECT * FROM artists WHERE id = id;
+	@artist = Artist.find(id)
 	# SELECT * FROM songs WHERE id = id;
 	@song = Song.find(song_id)
 
 	erb :show_song
 end
 
-# get form to edit song with current values
-get '/songs/:song_id/edit' do
+# get form to edit song
+get '/artists/:id/songs/:song_id/edit' do
+	id = params[:id]
 	song_id = params[:song_id]
-	# SELECT * FROM songs WHERE id = id;
+
+	# SELECT * FROM artists WHERE id = id;
+	@artist = Artist.find(id)
+	# SELECT * FROM songs WHERE id = song_id;
 	@song = Song.find(song_id)
 
 	erb :edit_song
 end
 
-#update song (first delete current then add new)
-post '/songs/:song_id' do
+#update song
+post '/artists/:id/songs/:song_id' do
+	id = params[:id]
 	song_id = params[:song_id]
-	# SELECT * FROM songs WHERE id = id;
 	song = Song.find(song_id)
-	song.delete
-	song.save!
 
-	# need to get artist_id here to append song object to artist object
-	# SELECT * FROM songs WHERE artist_id = id;
-	artist = Artist.find(params[:artist_id])
-	# INSERT INTO songs (name, on_itunes, soundcloud_likes) VALUES ('name', 'on_itunes', 'soundcloud_likes') WHERE artist_id = id;
-	artist.songs << Song.new(params[:song])
-	song_id = song.id
+	# UPDATE songs
+	# SET (name='name', on_itunes='on_itunes', soundcloud_likes='soundcloud_likes')
+	# WHERE id = song_id;
+	song.update_attributes(params[:song])
 
-	redirect "/songs/#{song_id}"
+	redirect "/artists/#{id}/songs/#{song_id}"
 end
 
 # delete song
-get '/songs/:song_id/delete' do
-	song_id = params[:id]
-	# SELECT * FROM songs WHERE id = id;
-	song = Song.find(id)
-	# DELETE FROM songs where id = id;
+get '/artists/:id/songs/:song_id/delete' do
+	id = params[:id]
+	song_id = params[:song_id]
+
+	# SELECT * FROM songs WHERE id = song_id;
+	song = Song.find(song_id)
+	# DELETE FROM songs where id = song_id;
 	song.delete
 	song.save!
-
-	# actually want redirect to just-deleted-song's specific artist
+	
+	### redirect '/artists/#{id}'
 	redirect '/artists'
 end
+
+	

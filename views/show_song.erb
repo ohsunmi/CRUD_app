@@ -1,16 +1,20 @@
 <div>
-<div>
-	<h3><%= @song.name %></h3>
-		<ul>
-			<li><b>On itunes?: </b><%= @song.on_itunes %></li>
-			<li><b>Soundcloud Likes: </b><%= @song.soundcloud_likes %></li>
-			<!-- change artist id to name -->
-			<li><b>Played by: </b><a href="/artists/<%= @song.artist_id%>"><%= @song.artist_id %></a></li>
-		</ul>
-</div>
+	<div>
+		<h3><%= @song.name %></h3>
+			<ul>
+				<li><b>On itunes?: </b>
+					<% if @song.on_itunes == true %>
+						<%= @song.on_itunes = 'Yes' %></li>
+					<% else %>
+						<%= @song.on_itunes = 'No' %></li>
+					<% end %>
+				<li><b>Soundcloud Likes: </b><%= @song.soundcloud_likes %></li>
+				<li><b>Played by: </b><a href="/artists/<%= @song.artist_id %>"><%= @artist.name %></a></li>
+			</ul>
+	</div>
 
-<div>
-	<a href="/songs/<%= @song.id %>/edit">Edit this song</a> | 
-	<a href="/songs/<%= @song.id %>/delete">Delete this song</a>
-</div>
+	<div>
+		<a href="/artists/<%= @artist.id %>/songs/<%= @song.id %>/edit">Edit this song</a> | 
+		<a href="/artists/<%= @artist.id %>/songs/<%= @song.id %>/delete">Delete this song</a>
+	</div>
 </div>

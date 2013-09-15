@@ -12,7 +12,7 @@
 	<h4>Songs</h4>
 		<ul>
 			<% @artist.songs.each do |song| %>
-			<li><a href="/songs/<%= song.id %>"><%= song.name %></a></li>
+			<li><a href="/artists/<%= @artist.id %>/songs/<%= song.id %>"><%= song.name %></a></li>
 			<% end %>
 		</ul>
 </div>
